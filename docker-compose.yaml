@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  http-rest:
+    container_name: "coffee-http"
+    build:
+      dockerfile: .dev/prod.Dockerfile
+      context: .
+      args:
+        CMD_SERVICE: http
+    ports:
+      - 1323:1323
