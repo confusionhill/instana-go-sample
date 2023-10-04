@@ -17,7 +17,8 @@ import (
 
 func main() {
 	database.LoadDatabase()
-	//instana.NewSensor("fake-coffee-shop")
+
+	e := echo.New()
 	opt := *instana.DefaultOptions()
 	opt.Service = "fake-coffe-shop"
 	opt.EnableAutoProfile = true
@@ -34,8 +35,6 @@ func main() {
 
 	// use logrus to log the Instana Go Collector messages
 	instana.SetLogger(logger)
-
-	e := echo.New()
 	cfg := services.GetConfig()
 	// auth
 	e.POST("/login", auth.LoginUser)
