@@ -8,6 +8,7 @@ import (
 	places2 "coffe-shop/services/places"
 	"github.com/golang-jwt/jwt/v5"
 	instana "github.com/instana/go-sensor"
+	"github.com/instana/go-sensor/instrumentation/instaecho"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
@@ -18,7 +19,6 @@ import (
 func main() {
 	database.LoadDatabase()
 
-	e := echo.New()
 	opt := *instana.DefaultOptions()
 	opt.Service = "fake-coffe-shop"
 	opt.EnableAutoProfile = true
@@ -35,7 +35,9 @@ func main() {
 
 	// use logrus to log the Instana Go Collector messages
 	instana.SetLogger(logger)
+	sensor := instana.NewSensor("fake-coffe-shop")
 	cfg := services.GetConfig()
+	e := instaecho.New(sensor)
 	// auth
 	e.POST("/login", auth.LoginUser)
 	e.POST("/register", auth.RegisterUser)
