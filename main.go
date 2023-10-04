@@ -18,11 +18,10 @@ import (
 func main() {
 	database.LoadDatabase()
 	instana.NewSensor("fake-coffee-shop")
-	instana.DefaultOptions()
-	opt := *instana.DefaultOptions()
-	opt.Service = "fake-coffe-shop"
-	opt.EnableAutoProfile = true
-	instana.StartMetrics(&opt)
+	//opt := *instana.DefaultOptions()
+	//opt.Service = "fake-coffe-shop"
+	//opt.EnableAutoProfile = true
+	//instana.StartMetrics(&opt)
 
 	// initialize and configure the logger
 	logger := logrus.New()
