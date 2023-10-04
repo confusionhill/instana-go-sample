@@ -9,6 +9,14 @@ import (
 	"strconv"
 )
 
+type SomethingStruct struct {
+	Name string
+}
+
+func Something(c echo.Context, something *SomethingStruct) error {
+	return c.String(404, something.Name)
+}
+
 func GetPlaceByID(c echo.Context) error {
 	placeID := c.Param("id")
 	resp, err := PerformGetPlaceByID(placeID)

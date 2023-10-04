@@ -54,6 +54,9 @@ func main() {
 		},
 		SigningKey: []byte(cfg.JwtSecret),
 	}
+	places.GET("/something", func(c echo.Context) error {
+		return places2.Something(c, nil)
+	})
 	places.GET("/:id", places2.GetPlaceByID)
 	places.GET("", places2.GetPlaces)
 	places.POST("", guard.OwnerGuard(places2.InsertPlace), echojwt.WithConfig(config))
