@@ -13,7 +13,7 @@ func GetPlaceByID(c echo.Context) error {
 	placeID := c.Param("id")
 	resp, err := PerformGetPlaceByID(placeID)
 	if err != nil {
-		log.Info(err.Error())
+		log.Error(err)
 		return c.String(http.StatusNotFound, "place not found")
 	}
 	return c.JSON(http.StatusOK, services.ResponseDTO{

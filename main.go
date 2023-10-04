@@ -17,11 +17,11 @@ import (
 
 func main() {
 	database.LoadDatabase()
-	instana.NewSensor("fake-coffee-shop")
-	//opt := *instana.DefaultOptions()
-	//opt.Service = "fake-coffe-shop"
-	//opt.EnableAutoProfile = true
-	//instana.StartMetrics(&opt)
+	//instana.NewSensor("fake-coffee-shop")
+	opt := *instana.DefaultOptions()
+	opt.Service = "fake-coffe-shop"
+	opt.EnableAutoProfile = true
+	instana.StartMetrics(&opt)
 
 	// initialize and configure the logger
 	logger := logrus.New()
@@ -43,6 +43,7 @@ func main() {
 
 	// test
 	e.GET("/", func(c echo.Context) error {
+		logger.Error("what the hell!")
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 	places := e.Group("/place")
