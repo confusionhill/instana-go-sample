@@ -22,7 +22,7 @@ func main() {
 	opt := *instana.DefaultOptions()
 	opt.Service = "fake-coffe-shop"
 	opt.EnableAutoProfile = true
-	instana.StartMetrics(&opt)
+	//instana.StartMetrics(&opt)
 
 	// initialize and configure the logger
 	logger := logrus.New()
@@ -35,7 +35,7 @@ func main() {
 
 	// use logrus to log the Instana Go Collector messages
 	instana.SetLogger(logger)
-	sensor := instana.NewSensor("fake-coffe-shop")
+	sensor := instana.NewSensorWithTracer(instana.NewTracerWithOptions(&opt)) //NewSensor("fake-coffe-shop")
 	cfg := services.GetConfig()
 	e := instaecho.New(sensor)
 	// auth
